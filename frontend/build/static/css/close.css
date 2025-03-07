@@ -1,0 +1,26 @@
+/* Change the background color of the grid */
+.ag-root-wrapper {
+    background-color: #ffffff;
+}
+
+/* Change the header color */
+.ag-header {
+    background-color: #ffffff;
+    color: white;
+}
+
+/* Change the row color */
+.ag-row {
+    background-color: #ffffff;
+}
+
+/* Change the row hover color */
+.ag-row:hover {
+    background-color: #c0c0cf;
+}
+
+/* Change the font size and color of the cells */
+.ag-cell {
+    font-size: 14px;
+    color: #333;
+}
