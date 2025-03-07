@@ -5,31 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .header .logo {
+            height: 40px;
+        }
+        .header .title {
+            flex-grow: 1;
+            color: #333;
+        }
         .ribbon {
             display: flex;
-            justify-content: space-around;
+            align-items: center;
             background-color: #f8f9fa;
             padding: 10px;
             border-bottom: 1px solid #dee2e6;
         }
-        .ribbon a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
+        .ribbon .button-container {
+            margin-left: auto;
         }
     </style>
+    <script type="module" src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
-    <h1>Welcome to Deal Mover</h1>
+    <div class="header">
+        <img src="{% static 'images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
+        <div class="title">Welcome to Deal Mover!</div>
+    </div>
     <div class="ribbon">
-        <a href="#">Pipeline</a>
-        <a href="#">New Project</a>
-        <a href="#">Portfolio</a>
-        <a href="{% url 'index' %}">Closed</a>
+        <div>
+            <a href="#" class="btn btn-secondary">Pipeline</a>
+            <a href="#" class="btn btn-secondary">Portfolio</a>
+            <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
+        </div>
+        <div class="button-container">
+            <button class="btn btn-primary">New Project</button>
+        </div>
     </div>
     <div id="root"></div>
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

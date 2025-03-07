@@ -4,5 +4,6 @@ def react_app_view(request):
     return render(request, "home.html")
 def home_view(request):
     return render(request, "home.html")
-def index_view(request):
-    return render(request, "index.html")
+
+def closed_view(request):
+    return render(request, 'closed.html')
