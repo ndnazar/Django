@@ -5,52 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'build/static/css/home.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .header .logo {
-            height: 40px;
-        }
-        .header .title {
-            flex-grow: 1;
-            color: #333;
-        }
-        .ribbon {
-            display: flex;
-            align-items: center;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .ribbon .button-container {
-            margin-left: auto;
-        }
-    </style>
-    <script type="module" src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
     <div class="header">
-        <img src="{% static 'images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
+        <img src="{% static 'build/static/images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
         <div class="title">Welcome to Deal Mover!</div>
     </div>
-    <div class="ribbon">
-        <div>
-            <a href="#" class="btn btn-secondary">Pipeline</a>
-            <a href="#" class="btn btn-secondary">Portfolio</a>
-            <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
-        </div>
-        <div class="button-container">
-            <button class="btn btn-primary">New Project</button>
-        </div>
+<div class="ribbon">
+    <div>
+        <a href="#" class="btn btn-secondary">Pipeline</a>
+        <a href="#" class="btn btn-secondary">Portfolio</a>
+        <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
     </div>
-    <div id="root"></div>
+    <div class="search-container">
+        <input type="text" id="search-input" autocomplete="off" placeholder="Search...">
+    </div>
+    <div class="icon-container">
+        <a href="{% url 'pb_data' %}" class="icon-button">
+            <img src="{% static 'build/static/images/Pitchbook.png' %}" alt="Pitchbook Logo">
+        </a>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'new_project' %}" class="btn btn-secondary">New Customer</a>
+    </div>
+</div>
+    <div class="content">
+        <div class="logo-container">
+            <img src="{% static 'build/static/images/pipeline.png' %}" alt="Pipeline Logo" class="pipeline-logo">
+            <img src="{% static 'build/static/images/diligence.png' %}" alt="Diligence Logo" class="diligence-logo">
+            <img src="{% static 'build/static/images/portfolio.png' %}" alt="Portfolio Logo" class="portfolio-logo">
+        </div>
+        <div class="pipeline-text-outside-container">
+        Manage your pipeline
+        </div>
+        <div class="diligence-text-outside-container">
+        Evaluate an opportunity
+        </div>
+        <div class="portfolio-text-outside-container">
+        Monitor your portfolio
+        </div>
+        <ul id="suggestions-list"></ul>
+    </div>
 </body>
 </html>

@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Room</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'build/static/borrower css/borrowerdataroom.css' %}">
+    <script defer type="module" src="{% static 'dist/placeholder.bundle.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="header">
+    <img src="{% static 'build/static/images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
+    <div class="title">Data Room - <span id="project-name"></span></div>
+</div>
+    <div class="ribbon">
+            <div>
+                <a href="#" class="btn btn-secondary">Pipeline</a>
+                <a href="#" class="btn btn-secondary">Portfolio</a>
+                <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" autocomplete="off" placeholder="Search...">
+            </div>
+            <div class="button-container">
+                <a href="{% url 'home' %}" class="btn btn-tertiary">Home</a>
+                <a href="{% url 'new_project' %}" class="btn btn-secondary">New Project</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <div class="sidebar">
+        <a href="{% url 'borrower_summary' %}">Borrower Summary</a>
+        <a href="{% url 'transactions' %}">Transactions</a>
+        <a href="{% url 'financial_performance' %}">Financial Performance</a>
+        <a href="{% url 'revenue_and_returns' %}">Revenue and Returns</a>
+    </div>
+    </div>
+<div class="content">
+        <div class="add-placeholder-container">
+            <select id="placeholder-type" class="form-control">
+                <option value="default">Default Placeholder</option>
+                <option value="custom">Custom Placeholder</option>
+            </select>
+            <input type="text" id="placeholder-name" class="form-control" placeholder="Enter placeholder name">
+            <button id="add-placeholder-btn" class="btn btn-primary">Add Placeholder</button>
+        </div>
+        <div id="react-placeholder-container"></div>
+    </div>
+<script>
+document.getElementById('add-placeholder-btn').addEventListener('click', () => {
+    const placeholderType = document.getElementById('placeholder-type').value;
+    const placeholderName = document.getElementById('placeholder-name').value.trim();
+    const placeholderId = placeholderName || `react-placeholder-${Date.now()}`;
+
+    if (!placeholderName && placeholderType === 'custom') {
+        alert('Please enter a name for the custom placeholder.');
+        return;
+    }
+
+    const newPlaceholder = document.createElement('div');
+    newPlaceholder.id = placeholderId;
+    newPlaceholder.className = `placeholder ${placeholderType}`;
+    newPlaceholder.textContent = placeholderName || 'Unnamed Placeholder';
+
+    // Create delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.textContent = 'X';
+    deleteBtn.addEventListener('click', () => {
+        newPlaceholder.remove();
+    });
+
+    newPlaceholder.appendChild(deleteBtn);
+
+    // Append the new placeholder to the container
+    document.getElementById('react-placeholder-container').appendChild(newPlaceholder);
+
+    // Notify React to render in the new placeholder
+    window.dispatchEvent(new CustomEvent('new-placeholder', { detail: { id: placeholderId } }));
+});
+
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const placeholderTypeSelect = document.getElementById('placeholder-type');
+            const placeholderNameInput = document.getElementById('placeholder-name');
+
+            // Show or hide the text box based on the selected placeholder type
+            placeholderTypeSelect.addEventListener('change', () => {
+                if (placeholderTypeSelect.value === 'custom') {
+                    placeholderNameInput.style.display = 'block';
+                } else {
+                    placeholderNameInput.style.display = 'none';
+                    placeholderNameInput.value = ''; // Clear input when not custom
+                }
+            });
+
+            // Initially hide the text box if the default option is selected
+            if (placeholderTypeSelect.value !== 'custom') {
+                placeholderNameInput.style.display = 'none';
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectName = urlParams.get('project_name') || 'Untitled Project';
+        document.getElementById('project-name').textContent = projectName;
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const currentPath = window.location.pathname;
+
+        sidebarLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

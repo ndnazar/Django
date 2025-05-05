@@ -1,31 +1,124 @@
-body {
-    background-color: blue;
-}
-
-h1 {
-    font-size: 36px;
-    color: #333;
-    text-align: center;
-    margin-top: 20px;
-}
-
 .header {
-    font-size: 24px;
-    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
 }
 
-.content {
-    padding: 20px;
-}
-
-.logo {
+.header .logo {
     height: 40px;
-    margin-right: 20px;
 }
 
-.title {
-    font-size: 24px;
-    color: white;
-    text-align: center;
+.header .title {
     flex-grow: 1;
+    color: #333;
+    text-align: center;
+}
+
+.ribbon {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.icon-container {
+    margin-right: 50px; /* Remove extra margin */
+    display: inline-block;
+    position: relative;
+}
+
+.icon-button img {
+    width: 65px; /* Adjust icon size */
+    height: 30px; /* Adjust icon size */
+}
+
+.ribbon .button-container {
+    margin-left: auto;
+}
+
+.ribbon .button-container .btn-secondary {
+    background-color: blue;
+    border-color: blue;
+    color: white;
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input {
+    width: 300px;
+}
+
+.logo-container {
+    position: relative;
+    margin-top: 20px;
+    height: 300px; /* Adjust height as needed */
+}
+
+.logo-container img {
+    position: absolute;
+}
+
+.logo-with-text {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo-container {
+    position: relative;
+    margin-top: 20px;
+    height: 300px; /* Adjust height as needed */
+}
+
+.logo-container img {
+    position: absolute;
+}
+
+.pipeline-logo {
+    top: 0;
+    left: 0;
+    height: 100px; /* Adjust height as needed */
+}
+
+.pipeline-text-outside-container {
+    margin-top: -275px; /* Adjust margin as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    margin-left: 200px; /* Adjust position as needed */
+}
+
+.diligence-logo {
+    top: 200px; /* Adjust position as needed */
+    left: 100px; /* Adjust position as needed */
+    height: 100px; /* Adjust height as needed */
+}
+
+.diligence-text-outside-container {
+    margin-top: 150px; /* Adjust margin as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    margin-left: 300px; /* Adjust position as needed */
+}
+
+.portfolio-logo {
+    top: 400px; /* Adjust position as needed */
+    left: 200px; /* Adjust position as needed */
+    height: 100px; /* Adjust height as needed */
+}
+
+.portfolio-text-outside-container {
+    margin-top: 175px; /* Adjust margin as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    margin-left: 400px; /* Adjust position as needed */
 }

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -10,3 +12,27 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class UploadedFile(models.Model):
+    objects = None
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+class Project(models.Model):
+    projectId = models.IntegerField(primary_key=True, null=False, blank=True)
+    industry = models.CharField(max_length=255)
+    transaction_type = models.CharField(max_length=255)
+    deal_stage = models.CharField(max_length=255)
+    projected_close_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'dealmover_projects'
+
+    def __str__(self):
+        return self.project_name
+
+    def clean(self):
+        if not isinstance(self.projectId, int):
+            raise ValidationError("projectId must be a number.")

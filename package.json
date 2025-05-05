@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "pg": "^8.15.6"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

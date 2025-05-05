@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrower Summary</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'build/static/borrower css/borrowersummary.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'build/static/images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
+        <div class="title">Borrower Summary</div>
+    </div>
+        <div class="ribbon">
+            <div>
+                <a href="#" class="btn btn-secondary">Pipeline</a>
+                <a href="#" class="btn btn-secondary">Portfolio</a>
+                <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" autocomplete="off" placeholder="Search...">
+            </div>
+            <div class="button-container">
+                <a href="{% url 'home' %}" class="btn btn-tertiary">Home</a>
+                <a href="{% url 'new_project' %}" class="btn btn-secondary">New Deal</a>
+                <a href="{% url 'quarterly_review' %}" class="btn btn-secondary2">New Review</a>
+            </div>
+        </div>
+<div class="container">
+    <div class="sidebar">
+        <a href="{% url 'borrower_summary' %}">Borrower Summary</a>
+        <a href="{% url 'exposure' %}">Exposure Summary</a>
+        <a href="{% url 'transactions' %}">Transactions</a>
+        <a href="{% url 'financial_summary' %}">Financial Performance</a>
+        <a href="{% url 'revenue_and_returns' %}">Revenue and Returns</a>
+    </div>
+<div class="content">
+</div>    <!-- Closing the content div -->
+<a href="{% url 'data_room' %}?project_name=" id="data-room-link" class="btn btn-secondary">Data Room</a>
+<script>
+    const projectNameInput = document.getElementById('search-input');
+    const dataRoomLink = document.getElementById('data-room-link');
+
+    projectNameInput.addEventListener('input', () => {
+        const projectName = encodeURIComponent(borrowerNameInput.value.trim());
+        dataRoomLink.href = `{% url 'data_room' %}?borrower_name=${borrowerName}`;
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const currentPath = window.location.pathname;
+
+        sidebarLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
+</script>
+</div>
+</body>
+</html>
