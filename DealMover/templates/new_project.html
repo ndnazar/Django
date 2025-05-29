@@ -7,13 +7,7 @@
     <title>New Project</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'build/static/css/newproject.css' %}">
-    <script defer type="module" src="{% static 'dist/main.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/multiline.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/another.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/stage.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/industry.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/date.bundle.js' %}"></script>
-    <script defer type="module" src="{% static 'dist/projectid.bundle.js' %}"></script>
+    <script defer type="module" src="{% static 'dist/notes.bundle.js' %}"></script>
     <script defer type="module" src="{% static 'dist/save.bundle.js' %}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -49,27 +43,11 @@
         <a href="{% url 'data_room' %}">Data Room</a>
     </div>
 <div class="content">
-    <div id="root"></div>
-    <a href="#" class="btn btn-secondary save-button" id="save-project-button">Save Project</a>
+    <div id="root"></div> <!-- Moved #root here -->
     <a href="#" class="btn btn-tertiary deal-deck-button">Build Deal Deck</a>
-<div class="flex-container">
-    <div id="react-text-box"></div>
-    <div class="sub-flex-container">
-        <div id="react-multiline-text-box"></div>
-        <div id="react-industry"></div>
-    </div>
-    <div class="sub-flex-container2">
-        <div id="react-transaction-type"></div>
-        <div id="react-deal-stage"></div>
-        <div id="react-close-date"></div>
-    </div>
-    <div class="sub-flex-container3">
-        <div id="react-project-ID"></div>
-    </div>
+    <div id="react-notes"></div>
 </div>
 </div>
-</div>    <!-- Closing the content div -->
-<a href="{% url 'data_room' %}?project_name=" id="data-room-link" class="btn btn-secondary">Data Room</a>
 <script>
     const projectNameInput = document.getElementById('search-input');
     const dataRoomLink = document.getElementById('data-room-link');

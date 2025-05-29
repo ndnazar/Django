@@ -6,30 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Project</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'build/static/css/newproject.css' %}">
+    <link rel="stylesheet" href="{% static 'build/static/css/summaryterms.css' %}">
+    <script defer type="module" src="{% static 'dist/notes.bundle.js' %}"></script>
+    <script defer type="module" src="{% static 'dist/terms.bundle.js' %}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'build/static/css/grid.css' %}">
 </head>
 <body>
     <div class="header">
         <img src="{% static 'build/static/images/dealmover.png' %}" alt="Deal Mover Logo" class="logo">
         <div class="title">Start a New Project!</div>
     </div>
-    <div class="ribbon">
-        <div>
-            <a href="#" class="btn btn-secondary">Pipeline</a>
-            <a href="#" class="btn btn-secondary">Portfolio</a>
-            <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
+        <div class="ribbon">
+            <div>
+                <a href="#" class="btn btn-secondary">Pipeline</a>
+                <a href="#" class="btn btn-secondary">Portfolio</a>
+                <a href="{% url 'closed' %}" class="btn btn-secondary">Closed</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" autocomplete="off" placeholder="Search...">
+            </div>
+            <div class="button-container">
+                <a href="{% url 'home' %}" class="btn btn-tertiary">Home</a>
+                <a href="{% url 'new_project' %}" class="btn btn-secondary">New Customer</a>
+            </div>
         </div>
-        <div class="search-container">
-            <input type="text" id="search-input" autocomplete="off" placeholder="Search...">
-        </div>
-        <div class="button-container">
-            <a href="{% url 'home' %}" class="btn btn-tertiary">Home</a>
-            <a href="{% url 'new_project' %}" class="btn btn-secondary">New Customer</a>
-        </div>
-    </div>
-        <div class="content">
+<div class="container">
     <div class="sidebar">
         <a href="{% url 'new_project' %}">Project Summary</a>
         <a href="{% url 'transaction_overview' %}">Transaction Overview</a>
@@ -41,7 +42,19 @@
         <a href="{% url 'industry' %}">Industry</a>
         <a href="{% url 'data_room' %}">Data Room</a>
     </div>
-        </div>
+<div class="content">
+    <div id="terms-root"></div> <!-- Moved #root here -->
+</div>
+</div>
+<script>
+    const projectNameInput = document.getElementById('search-input');
+    const dataRoomLink = document.getElementById('data-room-link');
+
+    projectNameInput.addEventListener('input', () => {
+        const projectName = encodeURIComponent(projectNameInput.value.trim());
+        dataRoomLink.href = `{% url 'data_room' %}?project_name=${projectName}`;
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const sidebarLinks = document.querySelectorAll('.sidebar a');

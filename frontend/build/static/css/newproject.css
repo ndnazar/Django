@@ -14,8 +14,11 @@
 
 .header .title {
     flex-grow: 1;
-    color: #333;
     text-align: center;
+    font-size: 28px; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #007bff; /* Add a primary color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
 }
 
 .search-container {
@@ -25,7 +28,11 @@
 }
 
 .search-container input {
-    width: 300px;
+    font-size: 16px; /* Adjust input text size */
+    padding: 8px; /* Add padding */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Round corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
 .ribbon {
@@ -85,33 +92,36 @@
     font-weight: bold; /* Make active link bold */
 }
 
-.content {
-    margin-left: 120px;
-    padding: 20px;
-    margin-top: 0px;
-    position: relative/* Adjust this value to match the height of the ribbon */
+#root {
+  position: absolute; /* Adjust as needed for your layout */
+  left: calc(200px + 10px); /* Sidebar width + 20px gap */
+  top: 140px;
+  padding: 20px; /* Optional, additional spacing from other edges */
+  width: calc(100% - 210px); /* Calculate remaining width (sidebar + gap) */
 }
 
-.content .save-button {
-    position: absolute; /* Use absolute positioning */
-    top: 20px; /* Adjust the vertical position */
-    right: -50px; /* Adjust the horizontal position */
-    background-color: #007bff;
-    color: white;
-    font-size: 12px;
-    padding: 5px 20px;
-    border-radius: 3px;
-    text-decoration: none;
+/* Root container */
+.flex-container,
+.sub-flex-container,
+.sub-flex-container-2,
+.sub-flex-container-3,
+.sub-flex-container-4 {
+    display: flex;
+    flex-direction: row; /* Keep containers in rows */
+    align-items: flex-start; /* Align containers' items to the start vertically */
+    justify-content: flex-start; /* Align containers' items to the start horizontally */
+    margin-bottom: 20px;
+    gap: 20px;
 }
 
-.save-button:hover {
-    background-color: #0056b3;
-    color: white;
-}
-
-.save-button:hover {
-    background-color: #0056b3;
-    color: white;
+.flex-container > div,
+.sub-flex-container > div,
+.sub-flex-container-2 > div,
+.sub-flex-container-3 > div,
+.sub-flex-container-4 > div {
+    display: flex;
+    flex-direction: column; /* Align each container's elements vertically */
+    justify-content: flex-start; /* Align elements to the start vertically */
 }
 
 .content .deal-deck-button {
@@ -125,8 +135,8 @@
     text-decoration: none;
     float: right;
     position: absolute; /* Use absolute positioning */
-    top: 20px; /* Adjust the vertical position */
-    right: 75px; /* Adjust the horizontal position */
+    top: -80px; /* Adjust the vertical position */
+    right: 60px; /* Adjust the horizontal position */
 }
 
 .deal-deck-button:hover {
@@ -134,121 +144,120 @@
     color: white;
 }
 
-.flex-container {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    gap: 40px; /* Add spacing between rows */
-}
-
-.sub-flex-container {
-    display: flex;
-    flex-direction: row; /* Align elements horizontally */
-    align-items: flex-start;
-    gap: 20px; /* Add spacing between elements */
-    margin-left: 0;
-}
-
-#react-multiline-text-box,
-#react-industry {
-    margin-left: 0; /* Remove individual margins */
-}
-
-.sub-flex-container2 {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px; /* Uniform spacing between all child elements */
-    margin-left: 0; /* Remove any left margin */
-}
-
-#react-transaction-type,
-#react-deal-stage {
-    margin-left: 0; /* Remove individual margins */
-}
-
-#react-text-box {
-    width: 100%; /* Full width for the text box */
-}
-
-.vertical-ribbon {
-  position: absolute;
-  top: 100px;
-  right: -40px;
-  display: flex;
-  flex-direction: column;
-  background-color: #f8f9fa;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.ribbon-item {
-  text-decoration: none;
-  color: #333;
-  padding: 10px 15px;
-  margin: 5px 0;
-  background-color: #e9ecef;
-  border-radius: 3px;
-  text-align: center;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.ribbon-item.active {
-  background-color: #0bb019;
-  color: #fff;
-}
-
-.ribbon-item.active.red {
-  background-color: #dc3545; /* Red for active Pass stage */
-  color: white;
-}
-
-.sub-flex-container3 {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px; /* Uniform spacing between all child elements */
-    margin-left: 0; /* Remove any left margin */
-}
-
-#react-project-ID-container {
-    position: relative; /* Allows positioning relative to its normal position */
-    top: -20px; /* Move up by 20px */
-    left: -20px; /* Move left by 20px */
+.parent-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px;
+    padding-bottom: 1px; /* Prevent margin collapsing */
 }
 
-/* Generate UUID Button */
-.generate-uuid-button button {
-    background: linear-gradient(90deg, #28a745, #218838); /* Gradient background */
+#react-project-ID-container input {
+    width: 100%; /* Make input take full width of the container */
+    padding: 5px 20px; /* Add padding inside the input */
+    border: 1px solid #007bff; /* Add a border with primary color */
+    border-radius: 5px; /* Add rounded corners */
+    font-size: 14px; /* Adjust font size */
+    background-color: transparent; /* Match container background */
+}
+
+.generate-id-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
     color: white;
-    font-size: 12px;
-    padding: 6px 15px;
-    position: relative; /* Ensure the button is positioned relative to its container */
-    top: -50px; /* Move the button up by 10px */
-    right: -215px;
+    font-size: 14px;
+    padding: 5px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    top: 20px; /* Adjust the vertical position */
+    right: 0; /* Adjust the horizontal position */
 }
 
-.generate-uuid-button button:hover {
-    background: linear-gradient(90deg, #218838, #1e7e34); /* Darker gradient on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+.generate-id-button:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7f);
     transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-#react-project-ID-container input {
-    width: 300px;
-    padding: 10px;
-    margin-bottom: 10px;
+.save-button-container, #react-notes {
+  position: fixed;
+  left: calc(900px + 10px); /* Same left margin for alignment */
+}
+
+.save-button-container {
+    text-align: center; /* Center-align the button */
+    top: 130px; /* Adjust the vertical position */
+}
+
+.save-button-container button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    font-size: 12px; /* Increase font size */
+    padding: 5px 20px; /* Add more padding */
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.save-button-container button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Add a hover lift effect */
+}
+
+.note-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.note-form textarea {
+    width: 100%;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    resize: none;
+    font-size: 14px;
+}
+
+.note-form button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.note-form button:hover {
+    background-color: #0056b3;
+}
+
+#react-notes {
+    top: 170px; /* Adjust vertical position */
+    width: 225px; /* Set fixed width for the ribbon */
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa; /* Ribbon background color */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.note {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.note .timestamp {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
 }

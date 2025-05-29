@@ -1,8 +1,12 @@
 {
   "dependencies": {
-    "pg": "^8.15.6"
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "pg": "^8.15.6",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "webpack-cli": "^6.0.1"
   }
 }

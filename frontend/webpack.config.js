@@ -1,17 +1,13 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: {
-    main: './src/TextBoxindex',
-    another: './src/TransactionTypeindex',
-    multiline: './src/MultilineTextboxindex',
     income: './src/P&Lgridindex',
-    stage: './src/DealStageindex',
-    industry: './src/Industryindex',
-    date: './src/CloseDateindex',
     placeholder: './src/Placeholderindex',
-    projectID: './src/ProjectIDindex',
-    save: './src/SaveProjectindex'
+    notes: './src/Notesindex',
+    save: './src/SaveProjectindex',
+    terms: './SummaryTerms/index',
   },
   output: {
     filename: '[name].bundle.js',
@@ -20,12 +16,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-typescript'
+            ]
           }
         }
       },
@@ -34,5 +34,8 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx']
   }
 };

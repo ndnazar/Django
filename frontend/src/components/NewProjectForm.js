@@ -1,32 +1,54 @@
 import React, { useState } from "react";
 import axios from "axios";
-import MultilineTextBox from "./MultilineTextBox";
-import ProjectID from "./ProjectID";
-import TransactionTypeDropdown from "./TransactionTypeDropdown";
-import IndustryDropdown from "./IndustryDropdown";
-import DealStageDropdown from "./DealStageDropdown";
-import ProjectedClosingDate from "./ProjectedClosingDate";
+import {
+  ProjectID,
+  TransactionTypeDropdown,
+  IndustryDropdown,
+  DealStageDropdown,
+  ProjectedClosingDate,
+  ProjectName,
+  CompanyName,
+  Borrower,
+  CompanyDescription,
+  ProductsAndServices,
+  AssetManager,
+  FYE,
+  Commitment,
+  TTM,
+} from "./NewProjectComponents";
 
-const NewProjectForm = () => {
+const NewProjectForm = ({ onTtmValueChange }) => {
   const [formData, setFormData] = useState({
-    project_name: "", // Added
-    industry: "",
-    transaction_type: "", // Renamed
+    project_name: "",
+    company_name: "",
+    primary_borrower: "",
+    company_description: "",
+    products_services: "",
+    asset_manager: "",
+    transaction_type: "",
     deal_stage: "",
-    projected_close_date: "", // Renamed
+    industry: "",
+    FYE_date: "",
+    TTM_date: "",
+    projected_close_date: "",
     projectId: "",
+    proposed_commitment: "",
   });
 
   const handleChange = (field, value) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+    const updatedFormData = {
+      ...formData,
       [field]: value,
-    }));
+    };
+
+    setFormData(updatedFormData);
+
+    // Store all form data in local storage
+    localStorage.setItem("newProjectFormData", JSON.stringify(updatedFormData));
   };
 
   const handleSave = async () => {
     try {
-      // Validate and format projected_close_date
       let formattedDate = formData.projected_close_date;
       if (formattedDate) {
         const date = new Date(formData.projected_close_date);
@@ -36,13 +58,11 @@ const NewProjectForm = () => {
         formattedDate = date.toISOString().split("T")[0];
       }
 
-      // Validate and convert projectId
       const projectId = formData.projectId ? Number(formData.projectId) : null;
       if (formData.projectId && isNaN(projectId)) {
         throw new Error("Invalid project ID. It must be a number.");
       }
 
-      // Ensure required fields are not blank
       const requiredFields = ["industry", "transaction_type", "deal_stage"];
       for (const field of requiredFields) {
         if (!formData[field]) {
@@ -71,33 +91,91 @@ const NewProjectForm = () => {
     }
   };
 
+  const generateProjectId = () => {
+    const newProjectId = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit random number
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      projectId: newProjectId.toString(),
+    }));
+  };
+
   return (
     <div>
-      <MultilineTextBox
-        value={formData.project_name} // Updated
-        onChange={(value) => handleChange("project_name", value)} // Updated
-      />
-      <ProjectID
-        value={formData.projectId}
-        onChange={(value) => handleChange("projectId", value)}
-      />
-      <TransactionTypeDropdown
-        value={formData.transaction_type} // Updated
-        onChange={(value) => handleChange("transaction_type", value)} // Updated
-      />
-      <IndustryDropdown
-        value={formData.industry}
-        onChange={(value) => handleChange("industry", value)}
-      />
-      <DealStageDropdown
-        value={formData.deal_stage}
-        onChange={(value) => handleChange("deal_stage", value)}
-      />
-      <ProjectedClosingDate
-        value={formData.projected_close_date} // Updated
-        onChange={(value) => handleChange("projected_close_date", value)} // Updated
-      />
-      <button onClick={handleSave}>Save Project</button>
+      <div className="flex-container">
+        <ProjectName
+          value={formData.project_name}
+          onChange={(value) => handleChange("project_name", value)}
+        />
+        <CompanyName
+          value={formData.company_name}
+          onChange={(value) => handleChange("company_name", value)}
+        />
+        <Borrower
+          value={formData.primary_borrower}
+          onChange={(value) => handleChange("primary_borrower", value)}
+        />
+      </div>
+      <div className="sub-flex-container">
+        <CompanyDescription
+          value={formData.company_description}
+          onChange={(value) => handleChange("company_description", value)}
+        />
+        <ProductsAndServices
+          value={formData.products_services}
+          onChange={(value) => handleChange("products_services", value)}
+        />
+        <AssetManager
+          value={formData.asset_manager}
+          onChange={(value) => handleChange("asset_manager", value)}
+        />
+      </div>
+      <div className="sub-flex-container-2">
+        <TransactionTypeDropdown
+          value={formData.transaction_type}
+          onChange={(value) => handleChange("transaction_type", value)}
+        />
+        <DealStageDropdown
+          value={formData.deal_stage}
+          onChange={(value) => handleChange("deal_stage", value)}
+        />
+        <IndustryDropdown
+          value={formData.industry}
+          onChange={(value) => handleChange("industry", value)}
+        />
+      </div>
+      <div className="sub-flex-container-3">
+        <FYE
+          value={formData.FYE_date}
+          onChange={(value) => handleChange("FYE_date", value)}
+        />
+        <TTM
+          value={formData.TTM_date}
+          onChange={(value) => handleChange("TTM_date", value)}
+        />
+        <ProjectedClosingDate
+          value={formData.projected_close_date}
+          onChange={(value) => handleChange("projected_close_date", value)}
+        />
+      </div>
+      <div className="sub-flex-container-4">
+        <div className="project-id-container">
+          <ProjectID
+            value={formData.projectId}
+            onChange={(value) => handleChange("projectId", value)}
+          />
+        </div>
+        <button className="generate-id-button" onClick={generateProjectId}>
+          Generate Project ID
+        </button>
+        <Commitment
+          className="proposed-commitment-textbox"
+          value={formData.proposed_commitment}
+          onChange={(value) => handleChange("proposed_commitment", value)}
+        />
+      </div>
+      <div className="save-button-container">
+        <button onClick={handleSave}>Save Project</button>
+      </div>
     </div>
   );
 };
